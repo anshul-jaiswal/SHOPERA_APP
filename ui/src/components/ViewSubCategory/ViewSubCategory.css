@@ -1,0 +1,11 @@
+#main
+{
+   min-height:300px;
+}
+.item{
+    height:150px;
+    width:150px;
+    float:left;
+    margin-left:10px;
+    margin-top:10px;
+}
