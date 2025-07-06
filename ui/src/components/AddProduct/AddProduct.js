@@ -129,8 +129,8 @@ function AddProduct() {
                             <br />
                             <div class="form-group">
                                 <label for="price">Price:</label>
-                                <input type="text" class="form-control" value={price} onChange={e => setPrice(e.target.value)}  />
-                                placeholder='Enter price'
+                                <input type="text" class="form-control" value={price} onChange={e => setPrice(e.target.value)} placeholder='Enter price' />
+                                
                             </div>
                             <br />
                             <div class="form-group">
