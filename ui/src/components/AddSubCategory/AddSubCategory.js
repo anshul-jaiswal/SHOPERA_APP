@@ -82,7 +82,8 @@ function AddSubCategory() {
                             <br />
                             <div class="form-group">
                                 <label for="SubCatnm">SubCatName:</label><br />
-                                <input type="text" class="form-control" value={Subcatnm} onChange={e => setSubcatname(e.target.value)} />
+                                <input type="text" class="form-control" value={Subcatnm} onChange={e => setSubcatname(e.target.value)}
+                                placeholder='Enter subCategory name' />
                             </div>
                             <br />
                             <div class="form-group">

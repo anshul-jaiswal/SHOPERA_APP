@@ -1,0 +1,12 @@
+.password-wrap{
+    position: relative;
+}
+.password-toggle
+{
+    position: absolute;
+    right: 10px;
+    top: 38px;
+    cursor: pointer;
+    color: #555;
+  
+}

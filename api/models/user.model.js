@@ -5,41 +5,40 @@ const userSchema = mongoose.Schema({
     _id: Number,
     name: {
         type: String,
-        require: [true, "Name is required"],
+        required: [true, "Name is required"],
         trim: true,
         lowercase: true,
     },
     email: {
         type: String,
-        require: [true, "Email is required"],
+        required: [true, "Email is required"],
         unique: true,
         trim: true,
 
     },
     password: {
         type: String,
-        require: [true, "password is required"],
+        required: [true, "password is required"],
         trim: true,
-        maxlength: 10,
         minlength: 5,
     },
     address: {
         type: String,
-        require: [true, "Address is required"],
+        required: [true, "Address is required"],
         trim: true,
     },
     mobile: {
         type: String,
-        require: [true, "mobile is required"],
+        required: [true, "mobile is required"],
         trim: true,
     },
     city: {
         type: String,
-        require: [true, "City is required"],
+        required: [true, "City is required"],
     },
     gender: {
         type: String,
-        require: [true, "gender is required"],
+        required: [true, "gender is required"],
     },
     role: String,
     status: Number,

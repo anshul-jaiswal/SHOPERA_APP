@@ -38,7 +38,7 @@ function Product() {
                        <div className='row g-4 mb-4'>
                        {productDetails?.map((Product) => (
                             <div className='shadow col-lg-4 col-md-6 col-sm-12 text-center justify-content-center bg-body-tertiary rounded mb-5'>
-                                <img src={`./assets/uploads/producticons/${Product.producticonnm}`} className='mx-2 p-2 mt-2 ' />
+                                <img src={`./assets/uploads/producticons/${Product.producticonnm}`} className='mx-2 p-2 mt-2  ' />
                                 <h1>{Product.title}</h1>
                                 <p>Size: {Product.size}</p>
 

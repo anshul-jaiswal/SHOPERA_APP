@@ -10,6 +10,9 @@ function CpAdmin() {
     const [newpass, setnewpass] = useState();
     const [output, setoutput] = useState()
     const [cnpass, setcnpass] = useState();
+    const [showOld, setShowOld] = useState(false);
+    const [showNew, setShowNew] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
     const navigate = useNavigate();
 
     const handlesubmit = () => {
@@ -23,7 +26,7 @@ function CpAdmin() {
                     setnewpass("")
                     setcnpass("")
                 }).catch((error) => {
-                    setoutput("password not updated successfully")
+                    setoutput("error", error)
                     toast.error("password not updated successfully")
 
                     setoldpass("")
@@ -43,7 +46,7 @@ function CpAdmin() {
         }).catch((error) => {
             setoutput("old password is not matched")
             toast.error("old password is not matched")
-        
+
         })
 
 
@@ -59,19 +62,41 @@ function CpAdmin() {
                         <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">CpAdmin Dashboard</span></h1>
                         <font class="text-center" style={{ "color": "blue" }}>{output}</font>
                         <form>
-                            <div class="form-group">
+                            <div class="form-group password-wrap">
                                 <label>Old Password:</label>
-                                <input type="password" class="form-control" value={oldpass} onChange={(e) => { setoldpass(e.target.value) }} />
+                                <input type={showOld ? "text" : "password"} class="form-control" value={oldpass} onChange={(e) => { setoldpass(e.target.value) }}
+                                    placeholder='Enter old password'
+                                />
+                                <span
+                                    className="password-toggle"
+                                    onClick={() => setShowOld(!showOld)}
+                                >
+                                    <i className={`fas ${showOld ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                                </span>
                             </div>
                             <br />
-                            <div class="form-group">
+                            <div class="form-group password-wrap">
                                 <label>New Password:</label>
-                                <input type="password" class="form-control" value={newpass} onChange={(e) => { setnewpass(e.target.value) }} />
+                                <input type={showNew ? "text" : "password"} class="form-control" value={newpass} onChange={(e) => { setnewpass(e.target.value) }}
+                                placeholder='Enter new password' />
+                                <span
+                                    className="password-toggle"
+                                    onClick={() => setShowNew(!showNew)}
+                                >
+                                    <i className={`fas ${showNew ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                                </span>
                             </div>
                             <br />
-                            <div class="form-group">
-                                <label>New Password:</label>
-                                <input type="password" class="form-control" value={cnpass} onChange={(e) => { setcnpass(e.target.value) }} />
+                            <div class="form-group password-wrap">
+                                <label>Confirm Password:</label>
+                                <input type={showConfirm ? "text" : "password"} class="form-control" value={cnpass} onChange={(e) => { setcnpass(e.target.value) }} 
+                                placeholder='Enter confirm password' />
+                                <span
+                                    className="password-toggle"
+                                    onClick={() => setShowConfirm(!showConfirm)}
+                                >
+                                    <i className={`fas ${showConfirm ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                                </span>
                             </div>
                             <br />
                             <button class="btn btn-success" type="button" onClick={handlesubmit}>Update password</button>

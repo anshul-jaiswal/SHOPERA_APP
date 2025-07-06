@@ -1,0 +1,11 @@
+#password{
+    position: relative;
+}
+
+#passwordIcon{
+    position: absolute;
+        right: 10px;
+        top: 32px;
+        cursor: pointer;
+        color: #555
+}

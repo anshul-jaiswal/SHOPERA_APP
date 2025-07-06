@@ -12,12 +12,13 @@ function Register() {
     const [city, setcity] = useState();
     const [mobile, setmobile] = useState();
     const [gender, setgender] = useState();
-    const [output, setoutput] = useState()
+    const [output, setoutput] = useState();
+    const [showPassword, setShowPassword] = useState(false);
 
     const handlesubmit = () => {
-        const userdetail = {"name": name, "email": email, "password": password, "address": address, "mobile": mobile, "city": city, "gender": gender }
-        
-        axios.post(__userApi +"save", userdetail).then((response) => {
+        const userdetail = { "name": name, "email": email, "password": password, "address": address, "mobile": mobile, "city": city, "gender": gender }
+
+        axios.post(__userApi + "save", userdetail).then((response) => {
             setoutput("user Register successfully")
             toast.success("user Register successfully");
             setname("");
@@ -27,9 +28,9 @@ function Register() {
             setmobile("");
             setcity("");
         }).catch((error) => {
-             setoutput("user Register not successfully")
-    toast.error("user Register not successfully");
-    })
+            setoutput("user Register not successfully")
+            toast.error("user Register not successfully");
+        })
     }
     return (<>
         {/* About Start */}
@@ -42,11 +43,12 @@ function Register() {
                         <div className='text-center mt-2 '><h6>Already have an account? <Link to="/login">Login</Link> </h6></div>
                         <font style={{ color: "blue" }}>{output}</font>
                         <form>
-                            
+
                             <div class="form-group">
                                 <label for="name">Name:</label>
                                 <input type="text" class="form-control" value={name}
                                     onChange={(e) => { setname(e.target.value) }}
+                                    placeholder="Enter your full name"
                                 />
                             </div>
                             <br />
@@ -54,21 +56,29 @@ function Register() {
                                 <label for="email">Email:</label>
                                 <input type="email" class="form-control" value={email}
                                     onChange={(e) => { setemail(e.target.value) }}
+                                    placeholder="Enter your Email"
                                 />
                             </div>
                             <br />
-                            <div class="form-group">
+                            <div class="form-group" id="password">
                                 <label for="password">Password:</label>
-                                <input type="password" class="form-control"
+                                <input type={showPassword ? "text" : "password"} class="form-control"
                                     value={password}
                                     onChange={(e) => { setpassword(e.target.value) }}
+                                    placeholder="Create a strong password"
                                 />
+                                <span id="passwordIcon"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    <i className={` fa fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                                </span>
                             </div>
                             <br />
                             <div class="form-group">
                                 <label for="address">Address:</label>
                                 <textarea class="form-control" value={address}
                                     onChange={(e) => { setaddress(e.target.value) }}
+                                    placeholder="Enter your full address"
                                 ></textarea>
                             </div>
                             <br />
@@ -76,18 +86,22 @@ function Register() {
                                 <label for="mobile">Mobile:</label>
                                 <input type="text" class="form-control" value={mobile}
                                     onChange={(e) => { setmobile(e.target.value) }}
+                                    placeholder="Enter your 10-digit mobile number"
                                 />
                             </div>
                             <br />
                             <div class="form-group">
                                 <label for="city">City:</label>
-                                <select class="form-control" value={city} onChange={(e) => { setcity(e.target.value) }}>
+                                <input list='city-option' class="form-control" value={city} onChange={(e) => { setcity(e.target.value) }}
+                                    placeholder="Select or type your city" />
+                                <datalist id='city-option'
+                                >
                                     <option>select city</option>
                                     <option>Indore</option>
                                     <option>Ujjain</option>
                                     <option>Bhopal</option>
                                     <option>Dewas</option>
-                                </select>
+                                </datalist>
                             </div>
                             <br />
                             <div class="form-group">
@@ -95,7 +109,7 @@ function Register() {
                                 Male :<input type="radio" value="male" name="gender" onChange={(e) => { setgender(e.target.value) }} />
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 Female :<input type="radio" value="female"
-                                name="gender" onChange={(e) => { setgender(e.target.value) }} />
+                                    name="gender" onChange={(e) => { setgender(e.target.value) }} />
                             </div>
                             <br />
                             <button type="button" onClick={handlesubmit} class="btn btn-success">Submit</button>

@@ -71,7 +71,7 @@ function AddProduct() {
         }).catch((error) => {
 
             // console.log(error)
-            setoutput("product not Added")
+            setoutput("error",error)
             toast.error("product not Added")
             
         })
@@ -93,7 +93,8 @@ function AddProduct() {
                         <form>
                             <div class="form-group">
                                 <label for="title">Title:</label>
-                                <input type="text" class="form-control" value={title} onChange={e => setTitle(e.target.value)} />
+                                <input type="text" class="form-control" value={title} onChange={e => setTitle(e.target.value)}
+                                placeholder='Enter Product title' />
                             </div>
                             <br />
                             <div class="form-group">
@@ -122,17 +123,19 @@ function AddProduct() {
                             <br />
                             <div class="form-group">
                                 <label for="description">Description:</label>
-                                <input type="text" class="form-control" value={Description} onChange={e => setDescription(e.target.value)} />
+                                <input type="text" class="form-control" value={Description} onChange={e => setDescription(e.target.value)} 
+                                placeholder='Enter Product Description'/>
                             </div>
                             <br />
                             <div class="form-group">
                                 <label for="price">Price:</label>
-                                <input type="text" class="form-control" value={price} onChange={e => setPrice(e.target.value)} />
+                                <input type="text" class="form-control" value={price} onChange={e => setPrice(e.target.value)}  />
+                                placeholder='Enter price'
                             </div>
                             <br />
                             <div class="form-group">
                                 <label for="size">Size:</label>
-                                <select class="form-control" value={size} onChange={e => setSize(e.target.value)}>
+                                <select class="form-control" value={size} onChange={e => setSize(e.target.value)}  >
                                     <option>Select Size</option>
                                     <option>XXL</option>
                                     <option>XL</option>

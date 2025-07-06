@@ -76,7 +76,7 @@ function EpAdmin() {
                             </div>
                             <br />
 
-                            <br />
+                            
                             <div class="form-group">
                                 <label for="address">Address:</label>
                                 <textarea class="form-control" value={address}
@@ -93,13 +93,16 @@ function EpAdmin() {
                             <br />
                             <div class="form-group">
                                 <label for="city">City:</label>
-                                <select class="form-control" value={city} onChange={(e) => { setcity(e.target.value) }}>
+                                <input list='city-option' class="form-control" value={city} onChange={(e) => { setcity(e.target.value) }}
+                                    placeholder="Select or type your city" />
+                                <datalist id='city-option'
+                                >
                                     <option>select city</option>
                                     <option>Indore</option>
                                     <option>Ujjain</option>
                                     <option>Bhopal</option>
                                     <option>Dewas</option>
-                                </select>
+                                </datalist>
                             </div>
                             <br />
                             <div class="form-group">

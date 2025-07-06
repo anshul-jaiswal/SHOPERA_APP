@@ -8,6 +8,10 @@ function Login() {
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
     const [output, setoutput] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
+
+
     const handlesubmit = () => {
         const userdetail = { "email": email, "password": password }
         if (!email) {
@@ -51,14 +55,22 @@ function Login() {
                         <form>
                             <div class="form-group">
                                 <label>Email:</label>
-                                <input type="email" class="form-control" value={email} onChange={(e) => { setemail(e.target.value) }} />
+                                <input type="email" class="form-control" value={email} onChange={(e) => { setemail(e.target.value) }} 
+                                 placeholder="Enter your Email"
+                                />
                             </div>
                             <br />
-                            <div class="form-group">
+                            <div class="form-group" id="password">
                                 <label>Password:</label>
-                                <input type="password" class="form-control" value={password} onChange={(e) => {
+                                <input type={showPassword ? "text" : "password"} class="form-control" value={password} onChange={(e) => {
                                     setpassword(e.target.value)
-                                }} />
+                                }} 
+                                placeholder="Enter your Password"/>
+                                <span id="passwordIcon"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    <i className={` fa fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                                </span>
                             </div>
                             <br />
                             <button class="btn btn-success" type="button" onClick={handlesubmit}>submit</button>

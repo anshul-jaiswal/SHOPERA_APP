@@ -21,7 +21,7 @@ const ProductSchema=mongoose.Schema({
     title:
     {
         type:String,
-        require:[true,"Product name is required"],
+        required:[true,"Product name is required"],
         lowercase:true,
         trim:true,
         unique:true,
@@ -29,24 +29,24 @@ const ProductSchema=mongoose.Schema({
     description:
     {
         type:String,
-        require:[true,"Product Description is required"],
+        required:[true,"Product Description is required"],
         lowercase:true,
-        trime:true
+        trim:true
     },
     price:{
         type:String,
-        require:[true,"Product price is required"],
+        required:[true,"Product price is required"],
         trim:true,
         lowercase:true
     },
     size:{
         type:String,
-        require:[true,"Product size is required"],
-       trim:true
+       trim:true,
+       default:null
     },
     producticonnm:{
         type:String,
-        require:[true,"Product icon name is required"],
+        required:[true,"Product icon name is required"],
         trim:true
     }
 

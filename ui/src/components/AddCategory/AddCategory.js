@@ -55,7 +55,8 @@ function AddCategory() {
                                 <label>Category Name:</label>
                                 <br />
 
-                                <input type="text" class="form-control" value={catName} onChange={(e) => { setcatName(e.target.value) }} />
+                                <input type="text" class="form-control" value={catName} onChange={(e) => { setcatName(e.target.value) }} 
+                                placeholder='Enter category name'/>
                             </div>
                             <br />
                             <div class="form-group">
