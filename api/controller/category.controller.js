@@ -1,63 +1,91 @@
 
 import rs from 'randomstring'
 import url from 'url'
-import path from 'path';
+
 import categoryschemamodel from '../models/category.model.js'
+import cloudinary from '../utils/CloudinaryConfig.js';
 export const save = async (req, res) => {
-    // console.log("itss working");
-    const categorylist = await categoryschemamodel.find();
-    const len = categorylist.length;
-    const _id = (len == 0) ? 1 : categorylist[len - 1]._id + 1;
 
-    const caticon=req.files.caticon;
-    const caticonname=rs.generate()+"-"+Date.now()+"-"+caticon.name; 
-    const catagorydetails = { ...req.body,"caticonname":caticonname,"_id": _id, };
-    // console.log(catagorydetails);
+
     try {
+        const categorylist = await categoryschemamodel.find();
+        const len = categorylist.length;
+        const _id = (len == 0) ? 1 : categorylist[len - 1]._id + 1;
+
+        const caticon = req.files.caticon;
+
+        if (!caticon.mimetype.startsWith("image/")) {
+            return res.status(400).json({ "status": false, "error": "Only image files allowed" })
+        }
+
+        const uploadImage = await cloudinary.uploader.upload(`data:${caticon.mimetype};base64,${caticon.data.toString("base64")}`,
+            {
+                folder: 'SHOPERA_Categories',
+                public_id: rs.generate() + "-" + Date.now() + "-" + caticon.name
+            })
+
+
+        const catagorydetails = { ...req.body, "caticonname": uploadImage.secure_url, "_id": _id, };
+        // console.log(catagorydetails);
+
         await categoryschemamodel.create(catagorydetails);
-        const __dirname=url.fileURLToPath(new URL('.',import.meta.url));
-        const uploadpath=path.join(__dirname,"../../ui/public/assets/uploads/caticons",caticonname);
-        caticon.mv(uploadpath)
-        res.status(201).json({"status":true});
+
+        res.status(201).json({ "status": true, url: uploadImage.secure_url });
     }
-    catch (err) {
+    catch (error) {
         console.log(err);
-        res.status(404).json({"status":false})
+        res.status(500).json({ "status": false, error: error.message })
 
     }
 };
+
+
+
 export const fetch = async (req, res) => {
-    const condition_obj = url.parse(req.url, true).query;
-    // console.log(condition_obj);
-    const categorylist = await categoryschemamodel.find(condition_obj);
-    // console.log(categorylist)
-    if (categorylist.length != 0) {
-        res.status(200).json(categorylist);
-    }
-    else {
-        res.status(500).json({ "msg": "not found data" });
+    try {
+        const condition_obj = req.query;
+        // console.log(condition_obj);
+        const categorylist = await categoryschemamodel.find(condition_obj);
+        // console.log(categorylist)
+        if (categorylist.length != 0) {
+            res.status(200).json(categorylist);
+        }
+        else {
+            res.status(404).json({ "status": false, "msg": "No Category data found" });
+        }
+    } catch (error) {
+        res.status(500).json({ "status": false, "msg": "Servor error", "error": error.message })
     }
 };
+
+
 export const update = async (req, res) => {
-    const categorylist = await categoryschemamodel.findOne((req.body.condition_obj));
+    const { condition_obj, content_obj } = req.body;
+    const categorylist = await categoryschemamodel.findOne((condition_obj));
     // console.log(categorylist);
     if (categorylist) {
-        const category = await categoryschemamodel.updateOne((req.body.condition_obj), { $set: (req.body.content_obj) });
+        const category = await categoryschemamodel.updateOne((condition_obj), { $set: (content_obj) });
         if (category) {
             res.status(200).json({ "msg": "update successfully" })
         }
         else {
-            res.status(500).json({ "msg": "user not update" });
+            res.status(500).json({ "msg": "Category not update" });
         }
     }
     else {
-        res.send(404).json({ "msg": "resouce not found" });
+        res.status(404).json({ "msg": "Resouce not found" });
     }
 };
+
+
+
 export const deletecategory = async (req, res) => {
-    const categorylist = await categoryschemamodel.findOne((req.body.condition_obj));
+
+    const { condition_obj } = req.body;
+
+    const categorylist = await categoryschemamodel.findOne((condition_obj));
     if (categorylist) {
-        const catagorydelete = await categoryschemamodel.deleteOne((req.body.condition_obj));
+        const catagorydelete = await categoryschemamodel.deleteOne((condition_obj));
         if (catagorydelete) {
             res.status(200).json({ "msg": "category delete succesfully" });
 
@@ -67,7 +95,7 @@ export const deletecategory = async (req, res) => {
         }
     }
     else {
-        res.status(404).json({ "msg": "resource not found" });
+        res.status(404).json({ "msg": "Resource not found" });
     }
 
 }

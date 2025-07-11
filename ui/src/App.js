@@ -22,6 +22,7 @@ import AddCategory from './components/AddCategory/AddCategory';
 import AddSubCategory from './components/AddSubCategory/AddSubCategory';
 import ViewCategory from './components/ViewCategory/ViewCategory';
 import ViewSubCategory from './components/ViewSubCategory/ViewSubCategory';
+import ViewProduct from './components/ViewProduct/ViewProduct';
 import VerifyUser from './components/Verifyusercomponent/Verifyuser';
 import AddProduct from './components/AddProduct/AddProduct';
 import Cart from './components/cartComponent/cart.js'
@@ -58,6 +59,7 @@ function App() {
                     <Route path='/addsubcategory' element={<AddSubCategory />}></Route>
                     <Route path='/viewcategory' element={<ViewCategory />}></Route>
                     <Route path='/viewsc/:catnm' element={<ViewSubCategory />}></Route>
+                    <Route path='/viewp/:Subcatnm' element={<ViewProduct />}></Route>
                     <Route path='/verify/:email' element={<VerifyUser />}></Route>
                     <Route path='/addproduct' element={<AddProduct />}></Route>
                     <Route path='/cart' element={<Cart />}></Route>

@@ -29,11 +29,15 @@ function AddCategory() {
 
         axios.post(__categoryApiurl + "save", formData, config).then((respnse) => {
             setoutput("category registered successfully")
+            setTimeout(() => setoutput(""), 3000);
             toast.success("category registered successfully")
             navigate("/addcategory")
 
         }).catch((error) => {
-            setoutput("category not registered successfully")
+            setoutput("Error: " + (error.response?.data?.msg || error.message));
+
+            setTimeout(() => setoutput(""), 3000);
+
             toast.error("category not registered successfully");
             navigate("/addcategory")
 

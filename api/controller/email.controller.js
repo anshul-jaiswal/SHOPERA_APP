@@ -18,7 +18,7 @@ var transporter = nodemailer.createTransport({
     from: process.env.NODEMAILER_USER,
     to:email,
     subject: 'Verification mail',
-    html:"<h1>Welcome to SHOPERA Stroe</h1><p>You have successfully register to our site , your login credentials are attached below</p><h2>Email:"+email+"</h2><h2>Password:"+password+"</h2><h1>Click on the link below to verify your account</h1>http://localhost:3000/verify/"+email
+    html:"<h1>Welcome to SHOPERA Store</h1><p>You have successfully register to our site , your login credentials are attached below</p><h2>Email:"+email+"</h2><h2>Password:"+password+"</h2><h1>Click on the link below to verify your account</h1>https://shopera-app.onrender.com/verify/"+email
   };
   
   transporter.sendMail(mailOptions, function(error, info){

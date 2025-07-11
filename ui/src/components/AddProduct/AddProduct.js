@@ -16,7 +16,7 @@ function AddProduct() {
     const [output, setoutput] = useState();
     const [cDetails, setCdetails] = useState([])
     const [scDetails, setSubCategoryDetails] = useState([]);
-    
+
 
 
     useEffect(() => {
@@ -70,10 +70,11 @@ function AddProduct() {
             toast.success("Product Added Successfully");
         }).catch((error) => {
 
-            // console.log(error)
-            setoutput("error",error)
+            setoutput("Error: " + (error.response?.data?.msg || error.message));
+
+            setTimeout(() => setoutput(""), 3000);
             toast.error("product not Added")
-            
+
         })
     }
 
@@ -94,7 +95,7 @@ function AddProduct() {
                             <div class="form-group">
                                 <label for="title">Title:</label>
                                 <input type="text" class="form-control" value={title} onChange={e => setTitle(e.target.value)}
-                                placeholder='Enter Product title' />
+                                    placeholder='Enter Product title' />
                             </div>
                             <br />
                             <div class="form-group">
@@ -123,25 +124,26 @@ function AddProduct() {
                             <br />
                             <div class="form-group">
                                 <label for="description">Description:</label>
-                                <input type="text" class="form-control" value={Description} onChange={e => setDescription(e.target.value)} 
-                                placeholder='Enter Product Description'/>
+                                <input type="text" class="form-control" value={Description} onChange={e => setDescription(e.target.value)}
+                                    placeholder='Enter Product Description' />
                             </div>
                             <br />
                             <div class="form-group">
                                 <label for="price">Price:</label>
                                 <input type="text" class="form-control" value={price} onChange={e => setPrice(e.target.value)} placeholder='Enter price' />
-                                
+
                             </div>
                             <br />
                             <div class="form-group">
                                 <label for="size">Size:</label>
                                 <select class="form-control" value={size} onChange={e => setSize(e.target.value)}  >
                                     <option>Select Size</option>
-                                    <option>XXL</option>
-                                    <option>XL</option>
-                                    <option>L</option>
-                                    <option>M</option>
-                                    <option>S</option>
+                                    <option value="">Select Size (if applicable)</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                   
                                 </select>
                             </div>
                             <br />

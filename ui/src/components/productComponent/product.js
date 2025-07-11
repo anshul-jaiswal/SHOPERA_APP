@@ -36,11 +36,11 @@ function Product() {
 
                         </div>
                        <div className='row g-4 mb-4'>
-                       {productDetails?.map((Product) => (
+                       { productDetails.length>0?(productDetails?.map((Product) => (
                             <div className='shadow col-lg-4 col-md-6 col-sm-12 text-center justify-content-center bg-body-tertiary rounded mb-5'>
-                                <img src={`./assets/uploads/producticons/${Product.producticonnm}`} className='mx-2 p-2 mt-2  ' />
+                                <img src={Product.producticonnm} className='product-image mx-2 p-2 mt-2' alt={Product.title} />
                                 <h1>{Product.title}</h1>
-                                <p>Size: {Product.size}</p>
+                               {Product.size &&<p>Size:{Product.size}</p>}
 
                                 <p>Price: ₹{Product.price}<span className='mx-2 '><button onClick={() => addToCart(Product)} type="button" className="btn btn-success rounded-3">
                                     Add to cart
@@ -49,7 +49,11 @@ function Product() {
 
                                 <button className='btn btn-primary mb-3 w-100' onClick={()=>navigate("/cart")} >Buy now</button>
                             </div>
-                        ))}
+                        ))):(
+
+                            <p>No Product found</p>
+                        )
+                    }
                        </div>
 
 

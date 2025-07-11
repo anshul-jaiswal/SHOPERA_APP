@@ -13,6 +13,7 @@ function Manageuser() {
             setuserdetail(response.data)
         }).catch((error) => {
             setoutput(error?.response?.data?.message || error.message || "Something went wrong");
+            setTimeout(() => setoutput(""), 3000);
         })
     })
 
@@ -21,31 +22,43 @@ function Manageuser() {
             const updateDetail = { "condition_obj": { "_id": _id }, "content_obj": { "status": 1 } }
             axios.patch(__userApi + "update", updateDetail).then((response) => {
                 setoutput("Verified")
+            setTimeout(() => setoutput(""), 3000);
+
                 toast.success("Verified")
 
                 navigate("/manageuser")
             }).catch((error) => {
                 setoutput(error?.response?.data?.message || error.message || "Something went wrong");
+            setTimeout(() => setoutput(""), 3000);
+
             })
         }
         else if (s == 'block') {
             const updateDetail = { "condition_obj": { "_id": _id }, "content_obj": { "status": 0 } }
             axios.patch(__userApi + "update", updateDetail).then((response) => {
                 setoutput("User Blocked Successfully")
+            setTimeout(() => setoutput(""), 3000);
+
                 toast.error("User Blocked Successfully")
                 navigate("/manageuser")
             }).catch((error) => {
                 setoutput(error?.response?.data?.message || error.message || "Something went wrong");
+            setTimeout(() => setoutput(""), 3000);
+
             })
         }
         else {
             const deletuser = { "condition_obj": { "_id": _id } }
             axios.delete(__userApi + "delete", deletuser).then((response) => {
                 setoutput("user Deleted")
+            setTimeout(() => setoutput(""), 3000);
+
                 toast.success("user Deleted")
                 navigate("/manageuser")
             }).catch((error) => {
                 setoutput(error?.response?.data?.message || error.message || "Something went wrong");
+            setTimeout(() => setoutput(""), 3000);
+
             })
         }
     }

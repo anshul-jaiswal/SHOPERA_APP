@@ -3,6 +3,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { __userApi } from '../../Apiurl';
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast';
+
 function Login() {
     const navigate = useNavigate();
     const [email, setemail] = useState('');
@@ -39,7 +41,11 @@ function Login() {
                 localStorage.setItem("status", users.status);
                 (users.role === "admin") ? navigate("/admin") : navigate("/user")
                 // setoutput("user login successfull")
-            }).catch((error) => { setoutput("user not successfull") })
+                toast.success("User loged in ")
+            }).catch((error) => {
+                setoutput("Error: " + (error.response?.data?.msg || error.message));
+                setTimeout(() => setoutput(""), 3000);
+            })
         }
     }
     return (<>
@@ -55,8 +61,8 @@ function Login() {
                         <form>
                             <div class="form-group">
                                 <label>Email:</label>
-                                <input type="email" class="form-control" value={email} onChange={(e) => { setemail(e.target.value) }} 
-                                 placeholder="Enter your Email"
+                                <input type="email" class="form-control" value={email} onChange={(e) => { setemail(e.target.value) }}
+                                    placeholder="Enter your Email"
                                 />
                             </div>
                             <br />
@@ -64,8 +70,8 @@ function Login() {
                                 <label>Password:</label>
                                 <input type={showPassword ? "text" : "password"} class="form-control" value={password} onChange={(e) => {
                                     setpassword(e.target.value)
-                                }} 
-                                placeholder="Enter your Password"/>
+                                }}
+                                    placeholder="Enter your Password" />
                                 <span id="passwordIcon"
                                     onClick={() => setShowPassword(!showPassword)}
                                 >

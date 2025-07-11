@@ -18,7 +18,9 @@ function Home({ product }) {
             setProductDetails(response.data);
             // console.log(response.data)
         }).catch((error) => {
-            console.log(error);
+            
+            setoutput("Error: " + (error.response?.data?.msg || error.message));
+            setTimeout(() => setoutput(""), 3000);
         });
 
     }, [])

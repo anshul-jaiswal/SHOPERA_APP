@@ -21,12 +21,14 @@ function CpAdmin() {
                 const userdetail = { "condition_obj": { "email": localStorage.getItem('email') }, "content_obj": { "password": cnpass } }
                 axios.patch(__userApi + "update", userdetail).then((response) => {
                     setoutput("password updated successfully");
+                    setTimeout(() => setoutput(""), 3000);
                     toast.success("password updated successfully");
                     setoldpass("")
                     setnewpass("")
                     setcnpass("")
                 }).catch((error) => {
-                    setoutput("error", error)
+                    setoutput("Error: " + (error.response?.data?.msg || error.message));
+                    setTimeout(() => setoutput(""), 3000);
                     toast.error("password not updated successfully")
 
                     setoldpass("")
@@ -37,6 +39,7 @@ function CpAdmin() {
             }
             else {
                 setoutput("old and new password not match")
+                setTimeout(() => setoutput(""), 3000);
                 toast.error("old and new password not match")
 
                 setoldpass("")
@@ -45,6 +48,7 @@ function CpAdmin() {
             }
         }).catch((error) => {
             setoutput("old password is not matched")
+            setTimeout(() => setoutput(""), 3000);
             toast.error("old password is not matched")
 
         })

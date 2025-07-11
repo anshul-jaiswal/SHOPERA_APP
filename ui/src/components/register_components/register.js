@@ -27,9 +27,11 @@ function Register() {
             setaddress("");
             setmobile("");
             setcity("");
+            setTimeout(() => setoutput(""), 3000);
         }).catch((error) => {
-            setoutput("user Register not successfully")
+            setoutput("Error: " + (error.response?.data?.msg || error.message));
             toast.error("user Register not successfully");
+            setTimeout(() => setoutput(""), 3000);
         })
     }
     return (<>

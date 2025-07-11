@@ -19,6 +19,7 @@ const Cartpage = () => {
     useEffect(() => {
         if (cartItems.length === 0) {
             setoutput("🛒 Your cart is empty.")
+            setTimeout(() => setoutput(""), 3000);
             toast.error("🛒 Your cart is empty.");
         }
     }, [cartItems]);

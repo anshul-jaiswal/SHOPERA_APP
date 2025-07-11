@@ -28,7 +28,8 @@ function EpAdmin() {
                 setf("checked");
 
         }).catch((error) => {
-            setoutput("Profile not update successfully")
+            setoutput("Error: " + (error.response?.data?.msg || error.message));
+            setTimeout(() => setoutput(""), 3000);
             toast.error("Profile not update successfully")
             
         })
@@ -38,10 +39,12 @@ function EpAdmin() {
         const userdetail = { "condition_obj": { "email": email }, "content_obj": { "name": name, "address": address, "mobile": mobile, "city": city, "gender": gender, } }
         axios.patch(__userApi + "update", userdetail).then((response) => {
             setoutput("Profile Edit successfully")
+            setTimeout(() => setoutput(""), 3000);
             toast.success("Profile Edit successfully")
 
         }).catch((error) => {
             setoutput("Profile not edit successfully");
+            setTimeout(() => setoutput(""), 3000);
             toast.error("Profile not edit successfully");
         
         })

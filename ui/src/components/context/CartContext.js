@@ -19,6 +19,7 @@ export const CartProvider = ({ children }) => {
 
             if (existingItem) {
                 toast.success("Increased quantity")
+                
                 return prevCart?.map((item) => (item._id === product._id ? { ...item, quantity: item.quantity + 1 } : item))
             }
             else {

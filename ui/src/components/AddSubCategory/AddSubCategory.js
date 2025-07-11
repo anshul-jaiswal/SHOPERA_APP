@@ -43,11 +43,13 @@ function AddSubCategory() {
 
         axios.post(__subcategoryapiurl + "save", formData, config).then((response) => {
             setoutput("subCategory Added Successfully");
+            setTimeout(() => setoutput(""), 3000);
             toast.success("subCategory Added Successfully");
             navigate("/addsubcategory");
         }).catch((error) => {
             // setoutput(error)
-            setoutput("Sub Category not Added Successfully");
+            setoutput("Error: " + (error.response?.data?.msg || error.message));
+            setTimeout(() => setoutput(""), 3000);
             toast.error("Sub Category not Added Successfully");
             navigate("/addsubcategory");
 

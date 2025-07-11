@@ -1,43 +1,56 @@
 
 import rs from 'randomstring';
-import url from 'url';
-import path from 'path';
+
 
 import SubCategoryschemamodel from '../models/SubCategory.model.js';
+import cloudinary from '../utils/CloudinaryConfig.js';
 
-export var save=async (req,res)=>{
+export var save = async (req, res) => {
 
-   var scList=await SubCategoryschemamodel.find();    
-   var l=scList.length;
-   var _id=(l==0)?1:scList[l-1]._id+1;
+  
 
- var caticon=req.files.caticon;
- var subcaticonnm = rs.generate()+"-"+Date.now()+"-"+caticon.name;
- var scDetails={...req.body,"subcaticonnm":subcaticonnm,"_id":_id};
- 
- try {
-  await SubCategoryschemamodel.create(scDetails);
-  var __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-  var uploadpath=path.join(__dirname,"../../ui/public/assets/uploads/subcaticons",subcaticonnm);
-  caticon.mv(uploadpath);  
-  res.status(201).json({"status":true}); 
- }
- catch(error)
- {
+
+  try {
+    var scList = await SubCategoryschemamodel.find();
+    var l = scList.length;
+    var _id = (l == 0) ? 1 : scList[l - 1]._id + 1;
+  
+    var caticon = req.files.caticon;
+    if (!caticon.mimetype.startsWith("image/")) {
+      return res.status(400).json({ "status": false, "error": "Only image files allowed" })
+    }
+
+    const uploadImage = await cloudinary.uploader.upload(`data:${caticon.mimetype};base64,${caticon.data.toString("base64")}`, {
+      folder: 'SHOPERA_SubCategories',
+      public_id: rs.generate() + "-" + Date.now() + "-" + caticon.name
+    })
+
+
+    var scDetails = { ...req.body, "subcaticonnm": uploadImage.secure_url, "_id": _id };
+
+    await SubCategoryschemamodel.create(scDetails);
+
+    res.status(201).json({ "status": true, url: uploadImage.secure_url });
+  }
+  catch (error) {
     // console.log(error);
-    res.status(500).json({"status":false});  
- }
+    res.status(500).json({ "status": false, error: error.message });
+  }
 };
 
 
-export var fetch=async(req,res)=>{
-  var condition_obj=url.parse(req.url,true).query;    
-  // console.log(condition_obj)
-  var scList=await SubCategoryschemamodel.find(condition_obj);
-  if(scList.length!=0)
-    res.status(200).json(scList);
-  else
-    res.status(404).json({"status":"Resource not found"});
+export var fetch = async (req, res) => {
+  try {
+    var condition_obj = req.query;
+    // console.log(condition_obj)
+    var scList = await SubCategoryschemamodel.find(condition_obj);
+    if (scList.length != 0)
+      res.status(200).json(scList);
+    else
+      res.status(404).json({ "status": false, "msg": "No subCategory found" });
+  } catch (error) {
+    res.status(500).json({ "status": false, "msg": "Server error", "error": error.message })
+  }
 };
 
 /*export var update=async(req,res)=>{
