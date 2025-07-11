@@ -1,5 +1,5 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+
 import fileupload from 'express-fileupload';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -29,8 +29,8 @@ import PaymentRoutes from './routes/payment.router.js'
 
 
 //to extract a body from url body:(body parser is used
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 //application level middlewares load cors configration
 app.use(cors());

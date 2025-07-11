@@ -12,6 +12,13 @@ export const save = async (req, res) => {
         const len = categorylist.length;
         const _id = (len == 0) ? 1 : categorylist[len - 1]._id + 1;
 
+        if (!req.files || !req.files.caticon) {
+            return res.status(400).json({
+              status: false,
+              error: "Category image is required"
+            });
+          }
+
         const caticon = req.files.caticon;
 
         if (!caticon.mimetype.startsWith("image/")) {

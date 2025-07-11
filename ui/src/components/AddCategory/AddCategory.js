@@ -10,7 +10,7 @@ function AddCategory() {
     const navigate = useNavigate();
     const [catName, setcatName] = useState();
 
-    const [file, setfile] = useState();
+    const [file, setfile] = useState(null);
     const [output, setoutput] = useState();
 
     const handlechange = (event) => {
@@ -23,11 +23,8 @@ function AddCategory() {
         formData.append("catnm", catName);
         formData.append("caticon", file)
 
-        const config = {
-            "content-type": "multipart/form-data"
-        }
 
-        axios.post(__categoryApiurl + "save", formData, config).then((respnse) => {
+        axios.post(__categoryApiurl + "save", formData).then((respnse) => {
             setoutput("category registered successfully")
             setTimeout(() => setoutput(""), 3000);
             toast.success("category registered successfully")
