@@ -1,4 +1,4 @@
-import './VerifyUser.css'
+import './Verifyuser.css'
 import { Navigate,useParams } from 'react-router-dom';
 import { useState , useEffect } from 'react';
 import {__userApi} from '../../Apiurl';
