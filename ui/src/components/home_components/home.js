@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 function Home({ product }) {
 
     const [productDetails, setProductDetails] = useState([]);
-
+    const [output, setoutput] = useState('')
 
 
 
@@ -18,7 +18,7 @@ function Home({ product }) {
             setProductDetails(response.data);
             // console.log(response.data)
         }).catch((error) => {
-            
+
             setoutput("Error: " + (error.response?.data?.msg || error.message));
             setTimeout(() => setoutput(""), 3000);
         });
@@ -66,19 +66,43 @@ function Home({ product }) {
                         </div>
                     </section>
 
-                   
 
 
-                    {productDetails?.map((Product) => (
-                        <div className='shadow col-lg-4 text-center justify-content-center bg-body-tertiary rounded mb-5'>
-                            <img src={`./assets/uploads/producticons/${Product.producticonnm}`} className='mx-2 p-2 mt-2' />
-                            <h1>{Product.title}</h1>
-                            <p>Size: {Product.size}</p>
 
-                            <p>Price: ₹{Product.price}</p>
+                    <section className="container-lg py-5 mb-5">
+                        <div className="container">
+                            <h2 className="text-center mb-4">Featured Products</h2>
 
+                            {output && <p className="text-danger text-center">{output}</p>}
+
+                            <div className="row g-4">
+                                {productDetails.length > 0 ? (
+                                    productDetails.slice(0, 6).map((Product) => (
+                                        <div key={Product._id} className="col-lg-4 col-md-6 col-sm-12">
+                                            <div className="shadow text-center justify-content-center bg-body-tertiary rounded p-3 h-100">
+                                                <img
+                                                    src={Product.producticonnm}
+                                                    className="mx-2 p-2 mt-2 img-fluid"
+                                                    alt={Product.title}
+
+                                                />
+                                                <h5 className="mt-3">{Product.title}</h5>
+                                                {Product.size &&  
+                                                    <p>Size: {Product.size}</p>
+                                                }
+                                                <p className="fw-bold">Price: ₹{Product.price}</p>
+                                                <Link to="/product" className="btn btn-outline-primary btn-sm mt-2">View More</Link>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="text-center w-100">
+                                        <p className="text-muted">No products available.</p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    ))}
+                    </section>
 
                 </div>
             </div>
