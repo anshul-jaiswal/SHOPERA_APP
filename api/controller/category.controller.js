@@ -33,8 +33,8 @@ export const save = async (req, res) => {
         res.status(201).json({ "status": true, url: uploadImage.secure_url });
     }
     catch (error) {
-        console.log(err);
-        res.status(500).json({ "status": false, error: error.message })
+        // console.log(err);
+        res.status(500).json({ "status": false, "msg": "Servor error",error: error.message })
 
     }
 };
