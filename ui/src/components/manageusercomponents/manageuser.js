@@ -101,16 +101,16 @@ function Manageuser() {
                                     {
                                         usedetail?.map((row) => (
                                             <tr key={row._id}>
-                                                <td key className='border border-dark ' border={2}>{row._id}</td>
-                                                <td key className='border border-dark ' border={2}>{row.name}</td>
-                                                <td key className='border border-dark ' border={2}>{row.email}</td>
-                                                <td key className='border border-dark ' border={2}>{row.mobile}</td>
-                                                <td key className='border border-dark ' border={2}>{row.address}</td>
-                                                <td key className='border border-dark ' border={2}>{row.city}</td>
-                                                <td key className='border border-dark ' border={2}>{row.gender}</td>
-                                                <td key className='border border-dark ' border={2}>{row.role}</td>
-                                                <td key className='border border-dark ' border={2}>{row.info}</td>
-                                                <td key className='border border-dark ' border={2}>{(row.status == 0) ? <font style={{ "color": "green" }} onClick={() => handlechange(row._id, 'verify')}>verify</font> : <font style={{ "color": "orange" }} onClick={() => handlechange(row._id, 'block')}>Block</font>}</td>
+                                                <td  className='border border-dark ' border={2}>{row.name}</td>
+                                                <td  className='border border-dark ' border={2}>{row.email}</td>
+                                                <td  className='border border-dark ' border={2}>{row.mobile}</td>
+                                                <td  className='border border-dark ' border={2}>{row.address}</td>
+                                                <td  className='border border-dark ' border={2}>{row._id}</td>
+                                                <td  className='border border-dark ' border={2}>{row.city}</td>
+                                                <td  className='border border-dark ' border={2}>{row.gender}</td>
+                                                <td  className='border border-dark ' border={2}>{row.role}</td>
+                                                <td  className='border border-dark ' border={2}>{row.info}</td>
+                                                <td  className='border border-dark ' border={2}>{(row.status == 0) ? <font style={{ "color": "green" }} onClick={() => handlechange(row._id, 'verify')}>verify</font> : <font style={{ "color": "orange" }} onClick={() => handlechange(row._id, 'block')}>Block</font>}</td>
                                                 <td style={{ "color": "red" }} className='border border-dark' border={2}
                                                     onClick={() => handlechange(row._id, 'delete')}>Delete</td>
 
