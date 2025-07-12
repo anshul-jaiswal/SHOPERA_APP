@@ -31,6 +31,9 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, "mobile is required"],
         trim: true,
+        minlength:[10,"Mobile must be 10 digits"],
+        maxlength:[10,"Mobile must be 10 digits"],
+        match: [/^[0-9]{10}$/, "Mobile number must be numeric and exactly 10 digits"]
     },
     city: {
         type: String,

@@ -120,8 +120,21 @@ function Header() {
                                                 <a class="nav-item nav-link active"><Link to="/user">Userhome</Link> </a>
                                                 <a class="nav-item nav-link active"><Link to="/viewcategory">ViewCategory</Link> </a>
                                                 <a class="nav-item nav-link"><Link to="/product">Product</Link></a>
-                                                <a class="nav-item nav-link"><Link to="/logout">Logout</Link></a>
+                                                <div class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Manage product</a>
+                                                    <div class="dropdown-menu rounded-0 m-0">
+                                                        <a class="dropdown-item"><Link to="/addproduct">Add Product</Link> </a>
+                                                    </div>
+                                                </div>
+                                                <div class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profile setting</a>
+                                                    <div class="dropdown-menu rounded-0 m-0">
+                                                        <a class="dropdown-item"><Link to="/epadmin">Edit Profile</Link> </a>
+                                                        <a class="dropdown-item"><Link to="/cpadmin">Change Password</Link> </a>
+                                                    </div>
+                                                </div>
                                                 <a class="nav-item nav-link"><Link to="/cart">Cart</Link></a>
+                                                <a class="nav-item nav-link"><Link to="/logout">Logout</Link></a>
                                             </div>
                                         </div>
                                     </nav>

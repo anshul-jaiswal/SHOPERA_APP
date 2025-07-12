@@ -16,7 +16,7 @@ function ViewCategory() {
       setError("Failed to load categories. Please try again later.");
     });
 
-  })
+  },[])
   return (
     <>
       {/* About Start */}
